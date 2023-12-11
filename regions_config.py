@@ -19,6 +19,20 @@ class StationsDefault():
         self.lon = lon
         self.lat = lat
 
+mpas_regions = {
+    "test" : RegionDefault(
+        name="west",
+        projection=ccrs.LambertConformal(),
+        central_lon=-120,
+        central_lat=38,
+        lon_radius=20,
+        scale="regional",
+        barb_skip=10,
+        station_priority=2,
+        hilo_size=50,
+    ),
+}
+
 wrf_regions = {
     1: {
         "nzo" : RegionDefault(
@@ -121,12 +135,26 @@ wrf_regions = {
 
 wrf_sounding_stations = {
     1: {},
-    2: {},
-    3: {
-        "chc" : StationsDefault(
-            name="CHC",
-            lon=171.53200,
-            lat=-43.48940,
-        ),
+    2: {
+        "AKL": StationsDefault(name="AKL", lon=174.800000, lat=-37.016667), 
+        "BHE": StationsDefault(name="BHE", lon=173.866667, lat=-41.516667),
+        "CHT": StationsDefault(name="CHT", lon=176.566667, lat=-43.950000),
+        "CHC": StationsDefault(name="CHC", lon=172.516667, lat=-43.483333),
+        "DUD": StationsDefault(name="DUD", lon=170.183333, lat=-45.916667),
+        "GIS": StationsDefault(name="GIS", lon=177.966667, lat=-38.666667),
+        "HKK": StationsDefault(name="HKK", lon=170.966667, lat=-42.716667),
+        "IVC": StationsDefault(name="IVC", lon=168.316667, lat=-46.416667),
+        "KBZ": StationsDefault(name="KBZ", lon=173.683333, lat=-42.416667),
+        "KAT": StationsDefault(name="KAT", lon=173.266667, lat=-35.116667),
+        "MFN": StationsDefault(name="MFN", lon=167.916667, lat=-44.666667),
+        "NPL": StationsDefault(name="NPL", lon=174.166667, lat=-39.016667),
+        "OAM": StationsDefault(name="OAM", lon=171.066667, lat=-44.966667),
+        "OHA": StationsDefault(name="OHA", lon=175.383333, lat=-40.200000),
+        "PPQ": StationsDefault(name="PPQ", lon=174.966667, lat=-40.883333),
+        "ROT": StationsDefault(name="ROT", lon=176.316667, lat=-38.116667),
+        "TRG": StationsDefault(name="TRG", lon=176.183333, lat=-37.666667),
+        "WLG": StationsDefault(name="WLG", lon=174.800000, lat=-41.316667),
+        "WSZ": StationsDefault(name="WSZ", lon=171.583333, lat=-41.750000),
     },
+    3: {},
 }
