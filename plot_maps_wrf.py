@@ -153,9 +153,11 @@ def plot_hour(init_time, fcst_time, domain, ens):
 
 
 def main():
-    with mp.Pool(maxtasksperchild=1) as pool:
-        for domain in np.arange(config.wrf_max_domain, config.wrf_min_domain - 1, -1):
-            for time in pd.date_range(start_date, end_date, freq=config.wrf_freq[domain]):
+    with mp.Pool(processes=24, maxtasksperchild=1) as pool:
+        for domain in np.arange(
+                config.wrf_max_domain, config.wrf_min_domain - 1, -1):
+            for time in pd.date_range(
+                    start_date, end_date, freq=config.wrf_freq[domain]):
                 pool.apply_async(
                     plot_hour,
                     args=(start_date, time, domain, args.ens, ),
