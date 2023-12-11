@@ -93,7 +93,7 @@ def plot_map(projection, extent, barb_skip,
         map_img.draw_hilo_wrf(hilo_var, **hilo_kwargs)
 
     map_img.draw_title(
-        f"{title}\nInit: {init_time:%Y-%m-%d %HZ} | FcstHr: [{int((fcst_time - init_time).total_seconds() / 3600)}] | Valid: {fcst_time:%Y-%m-%d %HZ}",
+        f"{title}\nInit: {init_time:%Y-%m-%d %HZ} | FcstHr: [{int((fcst_time - init_time).total_seconds() / 3600)}] | Valid: {fcst_time:%Y-%m-%d %H:%MZ}",
         loc="left")
     map_img.draw_shapefiles(**shapefile_kwargs)
 
