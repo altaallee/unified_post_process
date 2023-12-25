@@ -3,6 +3,7 @@ from variable_config import variable_cmaps
 from scipy.ndimage import gaussian_filter
 import matplotlib.colors as mpcolors
 import numpy as np
+from metpy.units import units
 import wrf_calc
 
 
@@ -1206,4 +1207,31 @@ wrf_products = lambda domain: {
         stations=False,
         scales=2
     ),
+}
+
+
+class TimeSeriesDefaults:
+    def __init__(self, name, var):
+        self.name = name
+        self.var = var
+
+
+wrf_time_series_products = {
+    "DPT2M": TimeSeriesDefaults(
+        name="DPT2M", var=lambda ds: wrf_calc.dpt2m(ds)),
+    "QPF1H": TimeSeriesDefaults(
+        name="QPF1H", var=lambda ds: ds["PREC_ACC_C"] + ds["PREC_ACC_NC"]),
+    "QPFT": TimeSeriesDefaults(
+        name="QPFT", var=lambda ds: ds["RAINNC"] + ds["RAINC"]),
+    "RH2M": TimeSeriesDefaults(name="RH2M", var=lambda ds: ds["rh2m"]),
+    "SWDOWN": TimeSeriesDefaults(name="SWDOWN", var=lambda ds: ds["SWDOWN"]),
+    "T2M": TimeSeriesDefaults(name="T2M", var=lambda ds: ds["T2"] - 273.15),
+    "WIND10M": TimeSeriesDefaults(
+        name="WIND10M",
+        var=lambda ds: wrf_calc.wind_speed(
+            ds["umet10"] * units("m/s"), ds["vmet10"] * units("m/s"))),
+    "WIND10MDIR": TimeSeriesDefaults(
+        name="WIND10MDIR",
+        var=lambda ds: wrf_calc.wind_direction(
+            ds["umet10"] * units("m/s"), ds["vmet10"] * units("m/s"))),
 }
