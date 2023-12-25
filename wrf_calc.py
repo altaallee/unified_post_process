@@ -560,6 +560,28 @@ def uvmet10(ds):
     return uvmet.sel({"u_v": "u"}), uvmet.sel({"u_v": "v"})
 
 
+def uvmet10_xr(ds):
+    """
+    Calculates U and V component of 10 meter wind relative to Earth coordinates
+    with xarray.Dataset.
+
+    Parameters
+    ----------
+    ds : xarray.Dataset
+        Dataset with WRF data.
+
+    Returns
+    -------
+    xarray.DataArray
+        DataArray with U component of 10 meter wind.
+    xarray.DataArray
+        DataArray with V component of 10 meter wind.
+    """
+    u = ds["U10"] * ds["COSALPHA"] - ds["V10"] * ds["SINALPHA"]
+    v = ds["V10"] * ds["COSALPHA"] + ds["U10"] * ds["SINALPHA"]
+    return u, v
+
+
 @need_cache
 def vorticity(ds, hash=False):
     """
@@ -579,6 +601,25 @@ def vorticity(ds, hash=False):
         return mpcalc.vorticity(ds.ds["umet"], ds.ds["vmet"])
     else:
         return mpcalc.vorticity(ds["umet"], ds["vmet"])
+
+
+def wind_direction(u, v):
+    """
+    Calculates wind direction from U and V components of wind.
+
+    Parameters
+    ----------
+    u : xarray.DataArray
+        Wind component in the X (East-West) direction.
+    v : xarray.DataArray
+        Wind component in the Y (North-South) direction.
+
+    Returns
+    -------
+    xarray.DataArray
+        DataArray with wind direction.
+    """
+    return mpcalc.wind_direction(u, v)
 
 
 def wind_speed(u, v):
