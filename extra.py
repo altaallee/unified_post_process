@@ -72,7 +72,7 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
     if True in [key in wrf_products for key in [
         "DBZ1KM", "OMEGA500", "OMEGA700", "OMEGA850", "LR700500", "PWAT",
         "RH250", "RH500", "RH700", "RH850", "RH925",
-        "T500", "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
+        "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["hgt"] = wrf_calc.height(ds_wrf)
     if True in [key in wrf_products for key in [
@@ -81,7 +81,7 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
     if True in [key in wrf_products for key in [
         "CAPEMU", "LR700500", "OMEGA500", "OMEGA700", "OMEGA850", "PWAT",
         "RH250", "RH500", "RH700", "RH850", "RH925",
-        "T500", "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
+        "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["prs"] = wrf_calc.pressure(ds_wrf)
     if True in [key in wrf_products for key in ["PWAT"]]:
@@ -100,7 +100,7 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
     if True in [key in wrf_products for key in [
         "CAPEMU", "IVT", "OMEGA500", "OMEGA700", "OMEGA850", "PWAT",
         "RH250", "RH500", "RH700", "RH850", "RH925",
-        "T500", "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
+        "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["umet"], ds_wrf.ds["vmet"] = wrf_calc.uvmet(nc_wrf)
     if True in [key in wrf_products for key in [

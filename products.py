@@ -1000,19 +1000,7 @@ wrf_products = lambda domain: {
         hilo_kwargs={"gaussian_sigma": config.wrf_slp_smooth_sigma[domain]},
         scales=99
     ),
-    "T500": ProductDefault(
-        name="TMP",
-        contourf_var=lambda ds: wrf_calc.interp_ds(
-            ds, "tmp", "prs", 50000) - 273.15,
-        cmap_label="[°C]",
-        barb_u=lambda ds: wrf_calc.interp_ds(ds, "umet", "prs", 50000),
-        barb_v=lambda ds: wrf_calc.interp_ds(ds, "vmet", "prs", 50000),
         contour_var=lambda ds: gaussian_filter(
-            wrf_calc.interp_ds(ds, "hgt", "prs", 50000),
-            config.wrf_height_smooth_sigma[domain]) / 10,
-        mask_var=lambda ds: ds.ds["PSFC"].where(ds.ds["PSFC"] < 50000),
-        title="500mb Temperature [°C] | Wind [m s$^{-1}$] | Height [dam]",
-        filename="t500",
         stations=False,
         scales=2
     ),
