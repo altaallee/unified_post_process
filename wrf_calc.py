@@ -17,6 +17,27 @@ def need_cache(func):
     return decorated
 
 
+def advection(scalar, u, v):
+    """
+    Calculates advection.
+
+    Parameters
+    ----------
+    scalar : xarray.DataArray
+        The quantity to be advected.
+    u : xarray.DataArray
+        The wind component in the x dimension.
+    v : xarray.DataArray
+        The wind component in the y dimension.
+
+    Returns
+    -------
+    xarray.DataArray
+        DataArray with advection.
+    """
+    if hash:
+        return mpcalc.advection(scalar, u, v)
+
 @need_cache
 def apparent_temperature(ds, hash=False):
     """
@@ -216,6 +237,27 @@ def dpt2m(ds, hash=False):
         return mpcalc.dewpoint_from_specific_humidity(
             ds["PSFC"], ds["T2"], ds["Q2"]).metpy.dequantify()
 
+
+def frontogenesis(theta, u, v):
+    """
+    Calculated frontogenesis.
+
+    Parameters
+    ----------
+    theta : xarray.DataArray
+        Potential temperature.
+    u : xarray.DataArray
+        The wind component in the x dimension.
+    v : xarray.DataArray
+        The wind component in the y dimension.
+
+    Returns
+    -------
+    xarray.DataArray
+        DataArray with advection.
+    """
+    return mpcalc.frontogenesis(theta, u, v)
+    
 
 @need_cache
 def height(ds, hash=False):

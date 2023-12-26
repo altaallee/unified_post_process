@@ -358,22 +358,6 @@ mpas_products = {
         stations=True,
         filename="t2m",
     ),
-    "T500": ProductDefault(
-        name="TMP",
-        mask_var=lambda ds: ds["surface_pressure"].where(
-            ds["surface_pressure"] < 50000),
-        contourf_var=lambda ds: ds["temperature_500hPa"] - 273.15,
-        cmap_label="[°C]",
-        barb_u=lambda ds: ds["uzonal_500hPa"],
-        barb_v=lambda ds: ds["umeridional_500hPa"],
-        contour_var=lambda ds: gaussian_filter(
-            ds["height_500hPa"].where(ds["surface_pressure"] > 50000) / 10,
-                config.mpas_height_smooth_sigma),
-        contour_kwargs={"levels": variable_cmaps["GPH500"].contour_levels},
-        title="500mb Temperature [°C] | Height [dam] | Wind [m s$^{-1}$]",
-        stations=False,
-        filename="t500",
-    ),
     "T700": ProductDefault(
         name="TMP",
         mask_var=lambda ds: ds["surface_pressure"].where(
@@ -1000,7 +984,73 @@ wrf_products = lambda domain: {
         hilo_kwargs={"gaussian_sigma": config.wrf_slp_smooth_sigma[domain]},
         scales=99
     ),
+    "TADV700": ProductDefault(
+        name="TMPADV",
+        contourf_var=lambda ds: wrf_calc.advection(
+            wrf_calc.interp_ds(ds, "tmp", "prs", 70000),
+            wrf_calc.interp_ds(ds, "umet", "prs", 70000),
+            wrf_calc.interp_ds(ds, "vmet", "prs", 70000)) * 3600,
+        cmap_label="[K hr$^{-1}$]",
+        barb_u=lambda ds: wrf_calc.interp_ds(ds, "umet", "prs", 70000),
+        barb_v=lambda ds: wrf_calc.interp_ds(ds, "vmet", "prs", 70000),
         contour_var=lambda ds: gaussian_filter(
+            wrf_calc.interp_ds(ds, "tmp", "prs", 70000) - 273.15,
+            config.wrf_height_smooth_sigma[domain]),
+        contour_kwargs={
+            "linestyles": "dashed",
+            "linewidths": 2,
+            "colors": np.where(
+                variable_cmaps["TMP"].contour_levels >= 0, "red", "blue")
+        },
+        contour_var_2=lambda ds: gaussian_filter(
+            wrf_calc.frontogenesis(
+                wrf_calc.interp_ds(ds, "tmp", "prs", 70000),
+                wrf_calc.interp_ds(ds, "umet", "prs", 70000),
+                wrf_calc.interp_ds(ds, "vmet", "prs", 70000)
+            ) * 100 * 1000 * 3 * 3600, config.wrf_height_smooth_sigma[domain] * 2),
+        contour_kwargs_2={
+            "levels": variable_cmaps["FRONT"].contour_levels,
+            "linewidths": 2,
+            "colors": "purple"
+        },
+        mask_var=lambda ds: ds.ds["PSFC"].where(ds.ds["PSFC"] < 70000),
+        title="700mb T Advection [K hr$^{-1}$] | Temperature [°C] | Frontogenesis [K/100km/3hr] | Wind [m s$^{-1}$]",
+        filename="tadv700",
+        stations=False,
+        scales=2
+    ),
+    "TADV850": ProductDefault(
+        name="TMPADV",
+        contourf_var=lambda ds: wrf_calc.advection(
+            wrf_calc.interp_ds(ds, "tmp", "prs", 85000),
+            wrf_calc.interp_ds(ds, "umet", "prs", 85000),
+            wrf_calc.interp_ds(ds, "vmet", "prs", 85000)) * 3600,
+        cmap_label="[K hr$^{-1}$]",
+        barb_u=lambda ds: wrf_calc.interp_ds(ds, "umet", "prs", 85000),
+        barb_v=lambda ds: wrf_calc.interp_ds(ds, "vmet", "prs", 85000),
+        contour_var=lambda ds: gaussian_filter(
+            wrf_calc.interp_ds(ds, "tmp", "prs", 85000) - 273.15,
+            config.wrf_height_smooth_sigma[domain]),
+        contour_kwargs={
+            "linestyles": "dashed",
+            "linewidths": 2,
+            "colors": np.where(
+                variable_cmaps["TMP"].contour_levels >= 0, "red", "blue")
+        },
+        contour_var_2=lambda ds: gaussian_filter(
+            wrf_calc.frontogenesis(
+                wrf_calc.interp_ds(ds, "tmp", "prs", 85000),
+                wrf_calc.interp_ds(ds, "umet", "prs", 85000),
+                wrf_calc.interp_ds(ds, "vmet", "prs", 85000)
+            ) * 100 * 1000 * 3 * 3600, config.wrf_height_smooth_sigma[domain] * 2),
+        contour_kwargs_2={
+            "levels": variable_cmaps["FRONT"].contour_levels,
+            "linewidths": 2,
+            "colors": "purple"
+        },
+        mask_var=lambda ds: ds.ds["PSFC"].where(ds.ds["PSFC"] < 85000),
+        title="850mb T Advection [K hr$^{-1}$] | Temperature [°C] | Frontogenesis [K/100km/3hr] | Wind [m s$^{-1}$]",
+        filename="tadv850",
         stations=False,
         scales=2
     ),

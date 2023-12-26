@@ -71,7 +71,7 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
         ds_wrf.ds["dpt2m"] = wrf_calc.dpt2m(ds_wrf)
     if True in [key in wrf_products for key in [
         "DBZ1KM", "OMEGA500", "OMEGA700", "OMEGA850", "LR700500", "PWAT",
-        "RH250", "RH500", "RH700", "RH850", "RH925",
+        "RH250", "RH500", "RH700", "RH850", "RH925", "TADV700", "TADV850",
         "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["hgt"] = wrf_calc.height(ds_wrf)
@@ -80,7 +80,7 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
         ds_wrf.ds["omega"] = wrf_calc.omega(nc_wrf)
     if True in [key in wrf_products for key in [
         "CAPEMU", "LR700500", "OMEGA500", "OMEGA700", "OMEGA850", "PWAT",
-        "RH250", "RH500", "RH700", "RH850", "RH925",
+        "RH250", "RH500", "RH700", "RH850", "RH925", "TADV700", "TADV850",
         "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["prs"] = wrf_calc.pressure(ds_wrf)
@@ -94,12 +94,14 @@ def read_data_wrf(init_time, fcst_time, domain, ens, wrf_products):
     if True in [key in wrf_products for key in [
             "DBZ", "DBZ1KM", "DPT2M", "RH2M", "IVT", "T2M", "TA2M", "WIND10M"]]:
         ds_wrf.ds["slp"] = wrf_calc.slp(nc_wrf)
+    if True in [key in wrf_products for key in ["TADV700", "TADV850"]]:
+        ds_wrf.ds["theta"] = wrf_calc.potential_temperature(ds_wrf)
     if True in [key in wrf_products for key in [
-            "LR700500", "T500", "T700", "T850", "T925"]]:
+            "LR700500", "TADV700", "TADV850", "T700", "T850", "T925"]]:
         ds_wrf.ds["tmp"] = wrf_calc.temperature(ds_wrf)
     if True in [key in wrf_products for key in [
         "CAPEMU", "IVT", "OMEGA500", "OMEGA700", "OMEGA850", "PWAT",
-        "RH250", "RH500", "RH700", "RH850", "RH925",
+        "RH250", "RH500", "RH700", "RH850", "RH925", "TADV700", "TADV850",
         "T700", "T850", "T925", "VORT500", "VORT700", "VORT850",
             "WIND250", "WIND500", "WIND700", "WIND850", "WIND925"]]:
         ds_wrf.ds["umet"], ds_wrf.ds["vmet"] = wrf_calc.uvmet(nc_wrf)

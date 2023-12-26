@@ -45,6 +45,9 @@ variable_cmaps = {
         cmap=ccmaps.get_cmap("radarscope_trunc"),
         extend="both",
     ),
+    "FRONT": VariableValues(
+        contour_levels=np.arange(2, 51, 2),
+    ),
     "GPH250": VariableValues(
         contour_levels=np.arange(954, 1150, 6),
     ),
@@ -121,8 +124,15 @@ variable_cmaps = {
     ),
     "TMP": VariableValues(
         contourf_levels=np.arange(-20, 40.1, 0.5),
+        contour_levels=np.arange(-21, 43, 3),
         ticks=np.arange(-20, 40.1, 10),
         cmap=ccmaps.get_cmap("temperature_fine"),
+        extend="both",
+    ),
+    "TMPADV": VariableValues(
+        contourf_levels=np.arange(-10, 10.1, 0.5),
+        ticks=np.arange(-10, 10.1, 5),
+        cmap=cm.bwr,
         extend="both",
     ),
     "VORT": VariableValues(
