@@ -42,6 +42,7 @@ def plot_map(projection, extent, barb_skip,
              barb_u_3, barb_v_3, barb_kwargs_3,
              quiver_u, quiver_v, quiver_kwargs,
              contour_var, contour_kwargs,
+             contour_var_2, contour_kwargs_2,
              title, init_time, fcst_time, 
              shapefile_kwargs,
              stations, station_kwargs,
@@ -86,6 +87,8 @@ def plot_map(projection, extent, barb_skip,
             **quiver_kwargs)
     if contour_var is not False:
         map_img.draw_contour(lon, lat, contour_var, **contour_kwargs)
+    if contour_var_2 is not False:
+        map_img.draw_contour(lon, lat, contour_var_2, **contour_kwargs_2)
     if stations is not False:
         map_img.draw_station_values_wrf(
             contourf_var, stations, **station_kwargs)
@@ -134,6 +137,8 @@ def plot_hour(init_time, fcst_time, domain, ens):
                     quiver_kwargs=product.quiver_kwargs,
                     contour_var=product.contour_var(ds_wrf) if product.contour_var else False,
                     contour_kwargs=product.contour_kwargs,
+                    contour_var_2=product.contour_var_2(ds_wrf) if product.contour_var_2 else False,
+                    contour_kwargs_2=product.contour_kwargs_2,
                     title=product.title,
                     init_time=init_time,
                     fcst_time=fcst_time,

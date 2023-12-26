@@ -15,6 +15,7 @@ class ProductDefault:
             barb_u_3=False, barb_v_3=False, barb_kwargs_3={},
             quiver_u=False, quiver_v=False, quiver_kwargs={},
             contour_var=False, contour_kwargs={},
+            contour_var_2=False, contour_kwargs_2={},
             mask_var=False,
             title="",
             shapefile_kwargs={},
@@ -66,6 +67,11 @@ class ProductDefault:
             "colors": "black",
             "linewidths": 1,
             **contour_kwargs} 
+        self.contour_var_2 = contour_var_2
+        self.contour_kwargs_2 = {
+            "colors": "black",
+            "linewidths": 1,
+            **contour_kwargs_2} 
         self.title = title
         self.shapefile_kwargs = {
             "edgecolor": "black",
