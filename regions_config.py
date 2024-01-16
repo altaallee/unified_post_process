@@ -3,7 +3,8 @@ import cartopy.crs as ccrs
 
 class RegionDefault:
     def __init__(self, name, projection, central_lon, central_lat, lon_radius,
-                 scale, barb_skip, station_priority, hilo_size):
+                 scale, barb_skip, station_priority, hilo_size,
+                 hires_shapefile=False):
         self.name = name
         self.projection = projection
         self.extent = [central_lon - lon_radius, central_lon + lon_radius,
@@ -12,6 +13,7 @@ class RegionDefault:
         self.barb_skip = barb_skip
         self.station_priority = station_priority
         self.hilo_size = hilo_size
+        self.hires_shapefile = hires_shapefile
 
 class StationsDefault():
     def __init__(self, name, lon, lat):
@@ -129,6 +131,7 @@ wrf_regions = {
             barb_skip=4,
             station_priority=7,
             hilo_size=100,
+            hires_shapefile=True,
         ),
     },
 }

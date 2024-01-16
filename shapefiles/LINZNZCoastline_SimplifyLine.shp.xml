@@ -1,0 +1,272 @@
+<metadata xml:lang="en">
+	<Esri>
+		<CreaDate>20210708</CreaDate>
+		<CreaTime>16053600</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<SyncOnce>FALSE</SyncOnce>
+		<DataProperties>
+			<itemProps><itemName Sync="TRUE">LINZNZCoastline_SimplifyLine</itemName><imsContentType Sync="TRUE">002</imsContentType><nativeExtBox><westBL Sync="TRUE">1089354.457223</westBL><eastBL Sync="TRUE">2490744.643755</eastBL><southBL Sync="TRUE">4162854.814318</southBL><northBL Sync="TRUE">6731623.776101</northBL><exTypeCode Sync="TRUE">1</exTypeCode></nativeExtBox><itemLocation><linkage Sync="TRUE">file://\\WEDGE-LAPTOP\C$\Users\Wedge\Documents\ArcGIS\Projects\modislanduse\LINZNZCoastline_SimplifyLine.shp</linkage><protocol Sync="TRUE">Local Area Network</protocol></itemLocation><itemSize Sync="TRUE">0.000</itemSize></itemProps><coordRef><type Sync="TRUE">Projected</type><geogcsn Sync="TRUE">GCS_NZGD_2000</geogcsn><csUnits Sync="TRUE">Linear Unit: Meter (1.000000)</csUnits><projcsn Sync="TRUE">NZGD_2000_New_Zealand_Transverse_Mercator</projcsn><peXml Sync="TRUE">&lt;ProjectedCoordinateSystem xsi:type='typens:ProjectedCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/3.2.0'&gt;&lt;WKT&gt;PROJCS[&amp;quot;NZGD_2000_New_Zealand_Transverse_Mercator&amp;quot;,GEOGCS[&amp;quot;GCS_NZGD_2000&amp;quot;,DATUM[&amp;quot;D_NZGD_2000&amp;quot;,SPHEROID[&amp;quot;GRS_1980&amp;quot;,6378137.0,298.257222101]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433]],PROJECTION[&amp;quot;Transverse_Mercator&amp;quot;],PARAMETER[&amp;quot;False_Easting&amp;quot;,1600000.0],PARAMETER[&amp;quot;False_Northing&amp;quot;,10000000.0],PARAMETER[&amp;quot;Central_Meridian&amp;quot;,173.0],PARAMETER[&amp;quot;Scale_Factor&amp;quot;,0.9996],PARAMETER[&amp;quot;Latitude_Of_Origin&amp;quot;,0.0],UNIT[&amp;quot;Meter&amp;quot;,1.0],AUTHORITY[&amp;quot;EPSG&amp;quot;,2193]]&lt;/WKT&gt;&lt;XOrigin&gt;-4020900&lt;/XOrigin&gt;&lt;YOrigin&gt;1900&lt;/YOrigin&gt;&lt;XYScale&gt;450445547.3910538&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;0.001&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;WKID&gt;2193&lt;/WKID&gt;&lt;LatestWKID&gt;2193&lt;/LatestWKID&gt;&lt;/ProjectedCoordinateSystem&gt;</peXml></coordRef><lineage><Process ToolSource="c:\users\wedge\appdata\local\programs\arcgis\pro\Resources\ArcToolbox\toolboxes\Conversion Tools.tbx\ExportFeatures" Date="20240113" Time="154420">ExportFeatures "LINZ NZ Coastline - Mean High Water" C:\Users\Wedge\Documents\ArcGIS\Projects\modislanduse\modislanduse.gdb\LINZNZCoastline # NOT_USE_ALIAS "id "id" true true false 10 Text 0 0,First,#,LINZ NZ Coastline - Mean High Water,id,0,9;coast_category "Coast Category" true true false 254 Text 0 0,First,#,LINZ NZ Coastline - Mean High Water,coast_category,0,253;publish_date "Publish Date" true true false 0 Long 0 0,First,#,LINZ NZ Coastline - Mean High Water,publish_date,-1,-1;source "source" true true false 254 Text 0 0,First,#,LINZ NZ Coastline - Mean High Water,source,0,253;scale "scale" true true false 20 Text 0 0,First,#,LINZ NZ Coastline - Mean High Water,scale,0,19;length "length" true true false 20 Text 0 0,First,#,LINZ NZ Coastline - Mean High Water,length,0,19;GlobalID "Global ID" false false true 38 GlobalID 0 0,First,#,LINZ NZ Coastline - Mean High Water,GlobalID,-1,-1;Shape__Length "Perimeter" false true true 0 Double 0 0,First,#,LINZ NZ Coastline - Mean High Water,Shape__Length,-1,-1" #</Process><Process ToolSource="c:\users\wedge\appdata\local\programs\arcgis\pro\Resources\ArcToolbox\toolboxes\Cartography Tools.tbx\SimplifyLine" Date="20240113" Time="160130">SimplifyLine LINZNZCoastline C:\Users\Wedge\Documents\ArcGIS\Projects\modislanduse\modislanduse.gdb\LINZNZCoastline_SimplifyLine "Retain critical points (Douglas-Peucker)" "1 Kilometers" FLAG_ERRORS KEEP_COLLAPSED_POINTS NO_CHECK # "Resolve topological errors"</Process><Process ToolSource="c:\users\wedge\appdata\local\programs\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\CopyFeatures" Date="20240113" Time="160248">CopyFeatures LINZNZCoastline_SimplifyLine C:\Users\Wedge\Documents\ArcGIS\Projects\modislanduse\LINZNZCoastline_SimplifyLine.shp # # # #</Process></lineage></DataProperties>
+		<SyncDate>20240113</SyncDate><SyncTime>16024600</SyncTime><ModDate>20240113</ModDate><ModTime>16024600</ModTime></Esri>
+	<mdFileID>726642f3-c04a-aaae-3976-a640469ab51d</mdFileID>
+	<mdLang>
+		<languageCode value="eng">
+		</languageCode>
+		<countryCode value="USA" Sync="TRUE"/></mdLang>
+	<mdChar>
+		<CharSetCd value="004"/>
+	</mdChar>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+	<mdHrLvName>dataset</mdHrLvName>
+	<mdContact>
+		<rpIndName>omit</rpIndName>
+		<rpOrgName>LINZ - Land Information New Zealand</rpOrgName>
+		<rpPosName>National Hydrographer</rpPosName>
+		<rpCntInfo>
+			<cntPhone>
+				<voiceNum>04 4600110</voiceNum>
+			</cntPhone>
+			<cntAddress>
+				<delPoint>155 The Terrace</delPoint>
+				<city>Wellington</city>
+				<postCode>6145</postCode>
+				<country>NZ</country>
+				<eMailAdd>info@linz.govt.nz</eMailAdd>
+			</cntAddress>
+		</rpCntInfo>
+		<role>
+			<RoleCd value="001"/>
+		</role>
+	</mdContact>
+	<mdDateSt>20210616</mdDateSt>
+	<mdStanName>ArcGIS Metadata</mdStanName>
+	<mdStanVer>1.0</mdStanVer>
+	<distInfo>
+		<distTranOps>
+			<onLineSrc>
+				<linkage>https://data.linz.govt.nz/layer/105085-nz-coastline-mean-high-water/</linkage>
+			</onLineSrc>
+			<onLineSrc>
+				<linkage>https://sandbox-2gxknc.koordinates.com/layer/105028-nz-coastline-mean-high-water/</linkage>
+			</onLineSrc>
+			<transSize Sync="TRUE">0.000</transSize></distTranOps>
+		<distFormat><formatName Sync="TRUE">Shapefile</formatName></distFormat></distInfo>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>NZ Coastline - Mean High Water</resTitle>
+			<date>
+				<createDate>2019-09</createDate>
+				<pubDate>2020-10</pubDate>
+				<reviseDate>2021-06</reviseDate>
+			</date>
+			<presForm><PresFormCd value="005" Sync="TRUE"/></presForm></idCitation>
+		<idAbs>This dataset defines the Mean High Water coastline of New Zealand and offshore islands at a scale of 1:50,000, and describes the type of coast along the coastline, for example, steep coast, mangrove, or stony shore.
+
+**Purpose**
+The NZ Coastline – Mean High Water dataset is the first step towards improving the national coastline data for New Zealand. LINZ is currently working on a long-term project, “Coastal Mapping” to capture a range of national coastlines derived from LiDAR and bathymetry. This will enable us to generate coastlines, for example, for Mean High Water Springs, Chart Datum and Highest Astronomical Tide.  The project is currently focused on capturing LiDAR and bathymetry data, and the timeframe for delivering the new coastlines will be established once the data capture has progressed.
+
+**Status**
+This dataset was created and is maintained from LINZ Hydrographic and Topographic sources. Originally created in August 2020, this dataset will be replaced by a more accurate dataset once data becomes available through the Coastal Mapping project.
+
+**Data sources and preparation**
+The spatial coastline data (1:50,000 scale) is sourced from the Topo50 series where it is described as a line forming the boundary between the land and sea, defined by mean high water. The source polygon data has been broken up into line segments to enable a coastal classification to be attributed to each segment of coast. Coastal classification data is based on official Electronic Navigational Charts published by the New Zealand Hydrographic Authority. Not all segments have been assigned a coastal category.
+
+---
+**APIs and web services**
+This dataset is available via ArcGIS Online and ArcGIS REST services, as well as our standard APIs.
+[LDS APIs and OGC web services](https://data.linz.govt.nz/layer/105085-nz-coastline-mean-high-water/webservices/)
+[ArcGIS Online map services](https://basedatanz.maps.arcgis.com/home/item.html?id=204119acdf1e43b3adfb57a15f550f31)
+[ArcGIS REST API](https://services7.arcgis.com/jI87xPT7G1AGV8Uo/arcgis/rest/services/)</idAbs>
+		<idPurp>The NZ Coastline – Mean High Water dataset is the first step towards improving the national coastline data for New Zealand.  LINZ is currently working on a long-term project, “Coastal Mapping” to capture a range of national coastlines derived from LiDAR and bathymetry.  This will enable us to generate coastlines, for example, for Mean High Water Springs, Chart Datum and Highest Astronomical Tide.  The project is currently focused on capturing LiDAR and bathymetry data, and the timeframe for delivering the new coastlines will be established once the data capture has progressed.</idPurp>
+		<idStatus>
+			<ProgCd value="005"/>
+		</idStatus>
+		<idPoC>
+			<rpIndName>Omit</rpIndName>
+			<rpOrgName>LINZ - Land Information New Zealand</rpOrgName>
+			<rpPosName>National Hydrographer</rpPosName>
+			<rpCntInfo>
+				<cntPhone>
+					<voiceNum>0800 665 463 or +64 4 460 0110</voiceNum>
+					<faxNum>+64 4 472 2244</faxNum>
+				</cntPhone>
+				<cntAddress>
+					<delPoint>155 The Terrace</delPoint>
+					<city>Wellington</city>
+					<adminArea/>
+					<postCode>6145</postCode>
+					<country>NZ</country>
+					<eMailAdd>info@linz.govt.nz</eMailAdd>
+				</cntAddress>
+			</rpCntInfo>
+			<role>
+				<RoleCd value="007"/>
+			</role>
+		</idPoC>
+		<resMaint>
+			<maintFreq>
+				<MaintFreqCd value="009"/>
+			</maintFreq>
+		</resMaint>
+		<dsFormat>
+			<formatName>*.xml</formatName>
+			<formatVer>Unknown</formatVer>
+		</dsFormat>
+		<themeKeys>
+			<keyword>New Zealand</keyword>
+			<thesaName>
+				<resTitle>ANZLIC Jurisdictions</resTitle>
+				<date>
+					<reviseDate>2008-10-29</reviseDate>
+				</date>
+				<resEd>Version 2.1</resEd>
+				<resEdDate>20081029</resEdDate>
+				<citId>
+					<identCode>http://asdd.ga.gov.au/asdd/profileinfo/anzlic-jurisdic.xml#anzlic-jurisdic</identCode>
+				</citId>
+				<citRespParty>
+					<rpOrgName>ANZLIC the Spatial Information Council</rpOrgName>
+					<role>
+						<RoleCd value="002"/>
+					</role>
+				</citRespParty>
+			</thesaName>
+		</themeKeys>
+		<searchKeys>
+			<keyword>New Zealand</keyword>
+		</searchKeys>
+		<resConst>
+			<SecConsts>
+				<class>
+					<ClasscationCd value="001"/>
+				</class>
+			</SecConsts>
+		</resConst>
+		<resConst>
+			<LegConsts>
+				<useLimit>Copyright of this work is owned by 
+
+Land Information New Zealand</useLimit>
+				<useConsts>
+					<RestrictCd value="001"/>
+				</useConsts>
+			</LegConsts>
+		</resConst>
+		<resConst>
+			<LegConsts>
+				<useLimit>Released by LINZ under Creative Commons Attribution 4.0 International (CC BY 4.0) with:
+Following Attribution:
+"Sourced from the LINZ Data Service and licensed for reuse under CC BY 4.0"
+For details see https://www.linz.govt.nz/data/licensing-and-using-data/attributing-linz-data</useLimit>
+				<useConsts>
+					<RestrictCd value="005"/>
+				</useConsts>
+			</LegConsts>
+		</resConst>
+		<spatRpType>
+			<SpatRepTypCd value="001"/>
+		</spatRpType>
+		<dataScale>
+			<equScale>
+				<rfDenom>50000</rfDenom>
+			</equScale>
+		</dataScale>
+		<dataLang>
+			<languageCode value="eng">
+			</languageCode>
+			<countryCode value="USA" Sync="TRUE"/></dataLang>
+		<dataChar>
+			<CharSetCd value="004"/>
+		</dataChar>
+		<tpCat>
+			<TopicCatCd value="003"/>
+		</tpCat>
+		<dataExt>
+			<geoEle>
+				<GeoBndBox>
+					<westBL>165.48138654</westBL>
+					<eastBL>-174.00783829</eastBL>
+					<southBL>-52.44484482</southBL>
+					<northBL>-29.23005249</northBL>
+				</GeoBndBox>
+			</geoEle>
+		</dataExt>
+		<dataExt>
+			<geoEle>
+				<GeoDesc>
+					<geoId>
+						<identAuth>
+							<resTitle>ANZMet Lite Country codelist</resTitle>
+							<date>
+								<pubDate>2009-03-31</pubDate>
+							</date>
+							<resEd>Version 1.0</resEd>
+							<resEdDate>20090331</resEdDate>
+							<citId>
+								<identCode>http://asdd.ga.gov.au/asdd/profileinfo/anzlic-country.xml#Country</identCode>
+							</citId>
+							<citRespParty>
+								<rpOrgName>ANZLIC the Spatial Information Council</rpOrgName>
+								<role>
+									<RoleCd value="002"/>
+								</role>
+							</citRespParty>
+						</identAuth>
+						<identCode>nzl</identCode>
+					</geoId>
+				</GeoDesc>
+			</geoEle>
+		</dataExt>
+		<envirDesc Sync="FALSE">Esri ArcGIS 12.8.0.29751</envirDesc><dataExt><geoEle><GeoBndBox esriExtentType="search"><exTypeCode Sync="TRUE">1</exTypeCode><westBL Sync="TRUE">-180.000000</westBL><eastBL Sync="TRUE">180.000000</eastBL><northBL Sync="TRUE">-29.230052</northBL><southBL Sync="TRUE">-52.684235</southBL></GeoBndBox></geoEle></dataExt></dataIdInfo>
+	<mdConst>
+		<SecConsts>
+			<class>
+				<ClasscationCd value="001"/>
+			</class>
+		</SecConsts>
+	</mdConst>
+	<mdConst>
+		<LegConsts>
+			<useLimit>Copyright of this work is owned by 
+
+Land Information New Zealand</useLimit>
+			<useConsts>
+				<RestrictCd value="001"/>
+			</useConsts>
+		</LegConsts>
+	</mdConst>
+	<mdConst>
+		<LegConsts>
+			<useLimit>Released by LINZ under Creative Commons Attribution 4.0 International (CC BY 4.0) with:
+Following Attribution:
+"Sourced from the LINZ Data Service and licensed for reuse under CC BY 4.0"
+For details see https://www.linz.govt.nz/data/licensing-and-using-data/attributing-linz-data</useLimit>
+			<useConsts>
+				<RestrictCd value="005"/>
+			</useConsts>
+		</LegConsts>
+	</mdConst>
+	<dqInfo>
+		<dqScope>
+			<scpLvl>
+				<ScopeCd value="005"/>
+			</scpLvl>
+			<scpLvlDesc>
+				<other>dataset</other>
+			</scpLvlDesc>
+		</dqScope>
+		<dataLineage>
+			<statement>The spatial coastline data (1:50,000 scale) is sourced from the Topo50 series where it is described as a line forming the boundary between the land and sea, defined by mean high water. The source polygon data has been broken up into line segments to enable a coastal classification to be attributed to each segment of coast. Coastal classification data is based on official Electronic Navigational Charts published by the New Zealand Hydrographic Authority.
+
+For information about the coastline data in this dataset see the Topo Data Dictionary for coastline: http://apps.linz.govt.nz/topo-data-dictionary/index.aspx?page=class-coastline. Further information on Topo50: http://www.linz.govt.nz/topography/topo-maps/topo50. For more information about the coastal classification data contained in this dataset, see the International Hydrographic Organization (IHO) Dictionary: http://www.iho-ohi.net/S32/engView.php)</statement>
+		</dataLineage>
+	</dqInfo>
+	<refSysInfo>
+		<RefSystem>
+			<refSysID>
+				<identCode code="2193"/>
+				<idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">6.15(9.0.0)</idVersion></refSysID>
+		</RefSystem>
+	</refSysInfo>
+	<spatRepInfo><VectSpatRep><geometObjs Name="LINZNZCoastline_SimplifyLine"><geoObjTyp><GeoObjTypCd value="002" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">0</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo><spdoinfo><ptvctinf><esriterm Name="LINZNZCoastline_SimplifyLine"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="3" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">0</efeacnt><spindex Sync="TRUE">FALSE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo><eainfo><detailed Name="LINZNZCoastline_SimplifyLine"><enttyp><enttypl Sync="TRUE">LINZNZCoastline_SimplifyLine</enttypl><enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">0</enttypc></enttyp><attr><attrlabl Sync="TRUE">FID</attrlabl><attalias Sync="TRUE">FID</attalias><attrtype Sync="TRUE">OID</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Internal feature number.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom></attrdomv></attr><attr><attrlabl Sync="TRUE">SHAPE</attrlabl><attalias Sync="TRUE">Shape</attalias><attrtype Sync="TRUE">Geometry</attrtype><attwidth Sync="TRUE">0</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Feature geometry.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Coordinates defining the features.</udom></attrdomv></attr><attr><attrlabl Sync="TRUE">id</attrlabl><attalias Sync="TRUE">id</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">coast_cate</attrlabl><attalias Sync="TRUE">coast_cate</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">254</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">publish_da</attrlabl><attalias Sync="TRUE">publish_da</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">source</attrlabl><attalias Sync="TRUE">source</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">254</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">scale</attrlabl><attalias Sync="TRUE">scale</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">20</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">length</attrlabl><attalias Sync="TRUE">length</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">20</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">Shape_Leng</attrlabl><attalias Sync="TRUE">Shape_Leng</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">InLine_FID</attrlabl><attalias Sync="TRUE">InLine_FID</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">SimLnFlag</attrlabl><attalias Sync="TRUE">SimLnFlag</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">5</attwidth><atprecis Sync="TRUE">5</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">MaxSimpTol</attrlabl><attalias Sync="TRUE">MaxSimpTol</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">MinSimpTol</attrlabl><attalias Sync="TRUE">MinSimpTol</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr></detailed></eainfo></metadata>

@@ -10,6 +10,9 @@ from ccmaps import mask_cmap
 import multiprocessing as mp
 import matplotlib
 matplotlib.rcParams["font.family"] = ["sans serif"]
+import cartopy.crs as ccrs
+from cartopy.io.shapereader import Reader
+from cartopy.feature import ShapelyFeature
 import argparse
 
 
@@ -33,6 +36,10 @@ stations = stations[
     (stations["LON"] > config.wrf_trim["west"]) &
     (stations["LON"] < config.wrf_trim["east"])]
 
+hires_shapefile = ShapelyFeature(
+    Reader("shapefiles/LINZNZCoastline_SimplifyLine.shp").geometries(),
+    crs=ccrs.epsg(2193), linewidth=1, color="black")
+
 def plot_map(projection, extent, barb_skip,
              lon, lat,
              contourf_var, contourf_kwargs, cmap_label,
@@ -44,7 +51,7 @@ def plot_map(projection, extent, barb_skip,
              contour_var, contour_kwargs,
              contour_var_2, contour_kwargs_2,
              title, init_time, fcst_time, 
-             shapefile_kwargs,
+             shapefile_kwargs, hires_shapefile,
              stations, station_kwargs,
              hilo_var, hilo_kwargs,
              region, filename, ens,
@@ -98,7 +105,7 @@ def plot_map(projection, extent, barb_skip,
     map_img.draw_title(
         f"{title}\nInit: {init_time:%Y-%m-%d %HZ} | FcstHr: [{int((fcst_time - init_time).total_seconds() / 3600)}] | Valid: {fcst_time:%Y-%m-%d %H:%MZ}",
         loc="left")
-    map_img.draw_shapefiles(**shapefile_kwargs)
+    map_img.draw_shapefiles(hires_shapefile, **shapefile_kwargs)
 
     map_img.save_image(
         f"../images_wrf/{init_time:%Y%m%d%H}/{ens}/{filename.lower()}/{region.lower()}",
@@ -147,6 +154,7 @@ def plot_hour(init_time, fcst_time, domain, ens):
                     station_kwargs={
                         "priority": region.station_priority,
                         **product.station_kwargs},
+                    hires_shapefile=hires_shapefile if region.hires_shapefile else False,
                     hilo_var=product.hilo_var(ds_wrf) if product.hilo_var else False,
                     hilo_kwargs={
                         "size": region.hilo_size,

@@ -255,12 +255,20 @@ class SingleMap:
         """
         self.ax.quiver(x, y, u, v, transform=ccrs.PlateCarree(), **kwargs)
 
-    def draw_shapefiles(self, **kwargs):
+    def draw_shapefiles(self, hires=False, **kwargs):
         """
         Draws shapefiles onto map.
+
+        Parameters
+        ----------
+        hires : cartopy.feature.ShapelyFeature (default=False)
+            Features to plot other than cartopy.
         """
-        self.ax.add_feature(cfeat.COASTLINE, **kwargs)
-        self.ax.add_feature(cfeat.BORDERS, **kwargs)
+        if hires:
+            self.ax.add_feature(hires, facecolor="none", **kwargs)
+        else:
+            self.ax.add_feature(cfeat.COASTLINE, **kwargs)
+            self.ax.add_feature(cfeat.BORDERS, **kwargs)
 
     def draw_station_values_mpas(self, data, stations, priority, decimal=0,
                                  station_condition=False):
