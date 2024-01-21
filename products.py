@@ -941,7 +941,7 @@ wrf_products = lambda domain: {
     ),
     "SNOWDEPTH": ProductDefault(
         name="SNOW",
-        contourf_var=lambda ds: ds.ds["SNOWH"] * 10,
+        contourf_var=lambda ds: ds.ds["SNOWH"] * 100,
         contourf_kwargs={"norm": None},
         title="Snow Depth [cm]",
         station_kwargs={"station_condition": lambda x: x > 0.5},
