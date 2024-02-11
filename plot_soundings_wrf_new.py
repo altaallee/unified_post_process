@@ -808,7 +808,7 @@ def plot_hour(init_time, fcst_time, domain, ens):
             ens=ens)
 
 def main():
-    with mp.Pool(processes=1, maxtasksperchild=1) as pool:
+    with mp.Pool(processes=24, maxtasksperchild=1) as pool:
         for domain in np.arange(
                 config.wrf_max_domain, config.wrf_min_domain - 1, -1):
             if wrf_sounding_stations[domain] != {}:
