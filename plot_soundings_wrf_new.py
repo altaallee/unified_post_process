@@ -1,8 +1,3 @@
-#from siphon.simplewebservice.wyoming import WyomingUpperAir
-#from datetime import datetime
-import pandas as pd
-
-import matplotlib.pyplot as plt
 from metpy.plots import SkewT, Hodograph
 from metpy.units import units
 from pathlib import Path
@@ -12,19 +7,33 @@ import sharppy.sharptab.thermo as thermo
 import sharppy.sharptab.params as params
 import sharppy.sharptab.interp as interp
 import sharppy.sharptab.winds as winds
+import config
 import wrf_calc
+from extra import add_cf_wrf, error_handler, read_data_wrf_sounding
+from regions_config import wrf_sounding_stations
+import pandas as pd
 import numpy as np
+from datetime import datetime, timedelta
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
 import matplotlib.transforms as transforms
 import matplotlib.patheffects as path_effects
+import multiprocessing as mp
+import argparse
 
 
-#df = WyomingUpperAir.request_data(datetime(2013, 5, 19, 12), "OUN")
-df = pd.read_csv("test2.csv")
-df = df[df.pressure >= 90]
-prof = profile.create_profile(
-    profile="convective", pres=df.pressure, hght=df.height, tmpc=df.temperature,
-    dwpc=df.dewpoint, u=df.u_wind, v=df.v_wind)
-t_adv, t_adv_bounds = params.inferred_temp_adv(prof, lat=41.32)
+parser = argparse.ArgumentParser(description="Plot skewt of WRF output.")
+parser.add_argument(
+    "--date", type=int, required=True,
+    help="Starting date of WRF run. (YYYYMMDDHH)")
+parser.add_argument(
+    "--hours", type=int, required=True, help="Total hours to plot data.")
+parser.add_argument(
+    "--ens", type=str, default="", help="Ensemble member.")
+args = parser.parse_args()
+
+start_date = datetime.strptime(str(args.date), "%Y%m%d%H")
+end_date = start_date + timedelta(hours=args.hours)
 
 h_sep = 0.29
 top_sep = 0.95
@@ -48,6 +57,20 @@ class Skewt():
         self.skewt.ax.axvline(0, color="blue", linewidth=0.5, linestyle="--")
         for i in range(-100, 50, 20):
             self.skewt.ax.axvspan(i, i + 10, color="black", alpha=0.05)
+
+        self.omega_ax = plt.axes(
+            (0.08, h_sep, 0.05, top_sep - h_sep), sharey=self.skewt.ax,
+            clip_on=False)
+        self.omega_ax.set_xlim(2, -6)
+        self.omega_ax.set_xticks([2, -2, -4])
+        self.omega_ax.tick_params(
+            axis="x", direction="in", pad=-10, colors="magenta", labelsize=6)
+        self.omega_ax.axvline(0, color="magenta", linestyle="--", linewidth=0.5)
+        self.omega_ax.spines["left"].set_visible(False)
+        self.omega_ax.spines["right"].set_visible(False)
+        self.omega_ax.yaxis.set_visible(False)
+        self.omega_ax.patch.set_alpha(0)
+        #self.omega_ax.axis("off")
 
         self.barb_ax = plt.axes(
             (skewt_r, h_sep, barb_r - skewt_r, top_sep - h_sep),
@@ -90,7 +113,7 @@ class Skewt():
         self.thetae_ax.tick_params(axis="y", direction="in", pad=-25)
         self.thetae_ax.set_ylim(999, 501)
         self.thetae_ax.text(
-            0.98, 0.98, "Θ-e", ha="right", va="top", fontsize=10,
+            0.02, 0.98, "Θ-e", ha="left", va="top", fontsize=10,
             transform=self.thetae_ax.transAxes)
     
     def plot_barbs(self, p, u, v):
@@ -113,6 +136,22 @@ class Skewt():
         self.barb_ax.barbs(
             [0] * len(p_barb), p_barb, u_barb, v_barb, length=6, linewidth=1,
             clip_on=False)
+
+    def plot_dgz(self, b_prs, t_prs):
+        """
+        Plots DGZ layer on skewt.
+
+        Parameters
+        ----------
+        b_prs : float
+            Bottom pressure of inflow layer in millibars.
+        t_prs : float
+            Top pressure of inflow layer in millibars.
+        """
+        self.omega_ax.axhline(
+            b_prs, color="cyan", linewidth=3, linestyle="--")
+        self.omega_ax.axhline(
+            t_prs, color="cyan", linewidth=3, linestyle="--")
 
     def plot_heights(self, p, h):
         """
@@ -293,6 +332,27 @@ class Skewt():
             x_pos, t_prs, f"{utils.FLOAT2STR(lr, 1)}°C km$^{{{-1}}}$",
             fontsize=8, ha="center", va="bottom", color="peru", transform=trans)
 
+    def plot_omega(self, p, omega):
+        """
+        Plots omega on skewt.
+
+        Parameters
+        ----------
+        p : list
+            Pressure values in millibars.
+        omega : list
+            Omega values in Pa / s
+        """
+        width = lambda prs, w: 10**(np.log10(prs) + w / 2) - 10**(np.log10(prs) - w / 2)
+        mask_pos = (omega > 0) & (p> 100)
+        mask_neg = (omega < 0) & (p> 100)
+        self.omega_ax.barh(
+            p[mask_pos], omega[mask_pos], color="blue",
+            height=width(p[mask_pos], 0.01), clip_on=False, zorder=1)
+        self.omega_ax.barh(
+            p[mask_neg], omega[mask_neg], color="salmon",
+            height=width(p[mask_neg], 0.01), clip_on=False, zorder=1)
+
     def plot_sounding_levels(self, lcl, lfc, el):
         """
         Plots LCL, LFC, and EL levels on skewt.
@@ -435,6 +495,30 @@ class Skewt():
         mask = p > 490
         self.thetae_ax.plot(thetae[mask], p[mask], color="blue")
 
+    def plot_title(self, station_name, lon, lat, fcst_time, init_time):
+        """
+        Plots title and time into on skewt.
+
+        Parameters
+        ----------
+        station_name : str
+            Name of station.
+        lon : float
+            Longitude of station.
+        lat : float
+            Latitude of station.
+        fcst_time : datetime.datetime
+            Forecast time of skewt.
+        init_time : datetime.datetime
+            Initalization time of model.
+        """
+        self.skewt.ax.set_title(
+            f"{station_name} Lon:{round(lon, 2)} Lat:{round(lat, 2)}",
+            loc="left")
+        self.hodo_ax.set_title(
+            f"Init: {init_time:%Y-%m-%d %H:%MZ} | Valid: {fcst_time:%Y-%m-%d %H:%MZ}",
+            loc="right")
+
     def save_image(self, path, fname, dpi=100, facecolor="white",
                    transparent=False, **kwargs):
         """
@@ -464,7 +548,22 @@ class Skewt():
                 f"{path}/{fname}.png", dpi=dpi, facecolor=facecolor, **kwargs)
         plt.close()
 
-def plot_sounding():
+def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
+    point = data["T2"].metpy.cartopy_crs.transform_point(
+        lon, lat, ccrs.PlateCarree())
+    data = data.metpy.assign_y_x(tolerance=10 * units("meter"))
+    point_data = data.interp(
+        {"west_east": point[0], "south_north": point[1]}, method="linear")
+    prof = profile.create_profile(
+        profile="convective", pres=wrf_calc.pressure(point_data) / 100,
+        hght=wrf_calc.height(point_data),
+        tmpc=thermo.ktoc(wrf_calc.temperature(point_data)),
+        dwpc=wrf_calc.dewpoint(point_data),
+        u=utils.MS2KTS(point_data["umet"]),
+        v=utils.MS2KTS(point_data["vmet"]),
+        omeg=point_data["omega"])
+    t_adv, t_adv_bounds = params.inferred_temp_adv(prof, lat=lat)
+
     skewt = Skewt()
 
     skewt.plot_line_skewt(
@@ -480,9 +579,10 @@ def plot_sounding():
     skewt.plot_line_skewt(
         prof.pres, prof.dwpc, color="green", linewidth=2)
 
-    skewt.plot_line_skewt(
-        prof.mlpcl.ptrace, prof.mlpcl.ttrace, color="orange", linewidth=1,
-        linestyle="--")
+    if prof.mlpcl.bplus > 0:
+        skewt.plot_line_skewt(
+            prof.mlpcl.ptrace, prof.mlpcl.ttrace, color="orange", linewidth=1,
+            linestyle="--")
 
     skewt.plot_heights(prof.pres, prof.hght - prof.hght.min())
     skewt.plot_surface_values(prof.pres.max(), prof.tmpc[0], prof.dwpc[0])
@@ -494,6 +594,9 @@ def plot_sounding():
         prof.max_lapse_rate_2_6[0])
     skewt.plot_inflow(
         prof.ebottom, prof.etop, prof.ebotm, prof.etopm, prof.esrh[0])
+
+    skewt.plot_omega(prof.pres, prof.omeg)
+    skewt.plot_dgz(prof.dgz_pbot, prof.dgz_ptop)
 
     skewt.plot_barbs(prof.pres, prof.u, prof.v)
 
@@ -683,6 +786,42 @@ def plot_sounding():
 
     skewt.plot_thetae(prof.pres, prof.thetae)
 
-    skewt.save_image(".", "test")
+    skewt.plot_title(station_name, lon, lat, fcst_time, init_time)
 
-plot_sounding()
+    skewt.save_image(
+        f"../images_wrf/{init_time:%Y%m%d%H}/{ens}/skewt/{station_name}/",
+        f"skewt_{station_name}_{fcst_time:%Y%m%d%H%M}")
+
+def plot_hour(init_time, fcst_time, domain, ens):
+    print("Reading data for", fcst_time, "domain", domain, flush=True)
+    ds_wrf = read_data_wrf_sounding(init_time, fcst_time, domain, ens)
+    ds_wrf.ds = add_cf_wrf(ds_wrf.ds)
+    for station in wrf_sounding_stations[domain].values():
+        plot_sounding(
+            data=ds_wrf.ds,
+            lon=station.lon,
+            lat=station.lat,
+            station_name=station.name,
+            fcst_time=fcst_time,
+            init_time=start_date,
+            ens=ens)
+
+def main():
+    with mp.Pool(processes=1, maxtasksperchild=1) as pool:
+        for domain in np.arange(
+                config.wrf_max_domain, config.wrf_min_domain - 1, -1):
+            if wrf_sounding_stations[domain] != {}:
+                for time in pd.date_range(
+                        start_date, end_date, freq=config.wrf_freq[domain]):
+                    print(time, flush=True)
+                    pool.apply_async(
+                        plot_hour,
+                        args=(start_date, time, domain, args.ens, ),
+                        error_callback=error_handler)
+        pool.close()
+        pool.join()
+
+
+if __name__ == "__main__":
+    mp.set_start_method("fork")
+    main()
