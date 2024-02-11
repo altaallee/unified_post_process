@@ -189,7 +189,7 @@ class Skewt():
         v : list
             V component of wind in knots.
         """
-        mask = h < 12000
+        mask = h < 13000
         h = h[mask]
         u = u[mask]
         v = v[mask]
@@ -220,7 +220,8 @@ class Skewt():
             capstyle="round", zorder=7)
 
         h_label = [
-            i for i in [1, 2, 3, 4, 5, 6, 7, 8, 9] if (i > h[0] / 1000) & (i < h[-1] / 1000)]
+            i for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 12] if
+            (i > h[0] / 1000) & (i < h[-1] / 1000)]
         u_label = wrf_calc.interpolate_1d(h / 1000, u, h_label)
         v_label = wrf_calc.interpolate_1d(h / 1000, v, h_label)
         for h, x, y in zip(h_label, u_label, v_label):
