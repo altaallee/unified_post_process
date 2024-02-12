@@ -43,6 +43,290 @@ tadv_r = 0.54
 skewt_shift = 0.02
 right = 0.98
 
+def colors_cape(cape):
+    if cape < 100:
+        return "darkgreen"
+    elif cape < 500:
+        return "gold"
+    elif cape < 2500:
+        return "orange"
+    elif cape < 5000:
+        return "red"
+    elif cape >= 5000:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_3cape(cape):
+    if cape < 25:
+        return "darkgreen"
+    elif cape < 50:
+        return "gold"
+    elif cape < 100:
+        return "orange"
+    elif cape < 250:
+        return "red"
+    elif cape >= 250:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_cin(cin, cape):
+    if cape == 0:
+        return "darkgreen"
+    if cin == 0:
+        return "darkred"
+    elif cin > -25:
+        return "red"
+    elif cin > -50:
+        return "orange"
+    elif cin > -100:
+        return "gold"
+    elif cin <= -100:
+        return "darkgreen"
+    else:
+        return "black"
+
+def colors_li(li):
+    if li > 0:
+        return "darkgreen"
+    elif li > -3:
+        return "gold"
+    elif li > -6:
+        return "orange"
+    elif li > -9:
+        return "red"
+    elif li <= -9:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_lcl(lcl):
+    if lcl < 750:
+        return "darkgreen"
+    elif lcl < 1250:
+        return "lime"
+    elif lcl < 2000:
+        return "gold"
+    elif lcl < 3000:
+        return "orange"
+    elif lcl >= 3000:
+        return "sienna"
+    else:
+        return "black"
+
+def colors_lfc(lfc):
+    if lfc < 1000:
+        return "darkred"
+    elif lfc < 2000:
+        return "red"
+    elif lfc < 3000:
+        return "orange"
+    elif lfc < 4000:
+        return "gold"
+    elif lfc >= 4000:
+        return "darkgreen"
+    else:
+        return "black"
+
+def colors_srh1(srh):
+    if srh < 50:
+        return "darkgreen"
+    elif srh < 150:
+        return "gold"
+    elif srh < 250:
+        return "orange"
+    elif srh < 350:
+        return "red"
+    elif srh >= 350:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_srh3(srh):
+    if srh < 100:
+        return "darkgreen"
+    elif srh < 200:
+        return "gold"
+    elif srh < 300:
+        return "orange"
+    elif srh < 400:
+        return "red"
+    elif srh >= 400:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_srheff(srh):
+    if srh < 25:
+        return "darkgreen"
+    elif srh < 50:
+        return "gold"
+    elif srh < 200:
+        return "orange"
+    elif srh < 300:
+        return "red"
+    elif srh >= 300:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_shear1(shear):
+    if shear < 10:
+        return "darkgreen"
+    elif shear < 15:
+        return "gold"
+    elif shear < 20:
+        return "orange"
+    elif shear < 25:
+        return "red"
+    elif shear >= 25:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_shear3(shear):
+    if shear < 20:
+        return "darkgreen"
+    elif shear < 30:
+        return "gold"
+    elif shear < 40:
+        return "orange"
+    elif shear < 50:
+        return "red"
+    elif shear >= 50:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_sheareff(shear):
+    if shear < 20:
+        return "darkgreen"
+    elif shear < 30:
+        return "gold"
+    elif shear < 40:
+        return "orange"
+    elif shear < 50:
+        return "red"
+    elif shear >= 50:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_shear6(shear):
+    if shear < 30:
+        return "darkgreen"
+    elif shear < 40:
+        return "gold"
+    elif shear < 50:
+        return "orange"
+    elif shear < 60:
+        return "red"
+    elif shear >= 60:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_lr(lr):
+    if lr < 5:
+        return "darkgreen"
+    elif lr < 6:
+        return "gold"
+    elif lr < 7:
+        return "orange"
+    elif lr < 8:
+        return "red"
+    elif lr >= 8:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_dcape(cape):
+    if cape < 200:
+        return "darkgreen"
+    elif cape < 400:
+        return "gold"
+    elif cape < 800:
+        return "orange"
+    elif cape < 1000:
+        return "red"
+    elif cape >= 1000:
+        return "darkred"
+    else:
+        return "black"
+
+def colors_pwat(pwat):
+    if pwat > 2:
+        return "darkgreen"
+    elif pwat > 1:
+        return "lime"
+    elif pwat > 0.5:
+        return "gold"
+    elif pwat > 0.25:
+        return "orange"
+    elif pwat <= 0.25:
+        return "sienna"
+    else:
+        return "black"
+
+def colors_rh(rh):
+    if rh > 90:
+        return "darkgreen"
+    elif rh > 75:
+        return "lime"
+    elif rh > 50:
+        return "gold"
+    elif rh > 25:
+        return "orange"
+    elif rh <= 25:
+        return "sienna"
+    else:
+        return "black"
+
+def colors_ptype(ptype):
+    if ptype == "Rain.":
+        return "darkgreen"
+    elif ptype == "Snow.":
+        return "royalblue"
+    elif ptype == "Sleet and Snow.":
+        return "darkviolet"
+    elif ptype == "Sleet.":
+        return "magenta"
+    elif ptype == "Freezing Rain/Drizzle.":
+        return "red"
+    elif ptype == "Sleet.":
+        return "deeppink"
+    elif ptype == "Freezing Rain.":
+        return "red"
+    else:
+        return "black"
+
+def colors_hazard(hazard):
+    if hazard == "PDS TOR":
+        return "fuchsia"
+    elif hazard == "TOR":
+        return "red"
+    elif hazard == "MRGL TOR":
+        return "red"
+    elif hazard == "SVR":
+        return "orange"
+    elif hazard == "MRGL SVR":
+        return "royalblue"
+    elif hazard == "FLASH FLOOD":
+        return "green"
+    elif hazard == "BLIZZARD":
+        return "teal"
+    elif hazard == "EXCESSIVE HEAT":
+        return "darkred"
+    else:
+        return "black"
+
+def colors_fzl(fzl):
+    if fzl < 500:
+        return "blue"
+    else:
+        return "black"
+
 class Skewt():
     def __init__(self, figsize=[12, 8]):
         self.fig = plt.figure(figsize=figsize)
@@ -631,22 +915,28 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
     for i, parcel in enumerate([prof.sfcpcl, prof.mlpcl, prof.mupcl, prof.fcstpcl]):
         skewt.fig.text(
             thermo_x[1], thermo_y[i+1], utils.INT2STR(parcel.bplus),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_cape(parcel.bplus))
         skewt.fig.text(
             thermo_x[2], thermo_y[i+1], utils.INT2STR(parcel.b3km),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_3cape(parcel.b3km))
         skewt.fig.text(
             thermo_x[3], thermo_y[i+1], utils.INT2STR(parcel.bminus),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_cin(parcel.bminus, parcel.bplus))
         skewt.fig.text(
             thermo_x[4], thermo_y[i+1], utils.INT2STR(parcel.li5),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_li(parcel.li5))
         skewt.fig.text(
             thermo_x[5], thermo_y[i+1], utils.INT2STR(parcel.lclhght),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_lcl(parcel.lclhght))
         skewt.fig.text(
             thermo_x[6], thermo_y[i+1], utils.INT2STR(parcel.lfchght),
-            fontsize=fontsize, ha="center", va="center")
+            fontsize=fontsize, ha="center", va="center",
+            color=colors_lfc(parcel.lfchght))
         skewt.fig.text(
             thermo_x[7], thermo_y[i+1], utils.INT2STR(parcel.elhght),
             fontsize=fontsize, ha="center", va="center")
@@ -684,11 +974,25 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
          f"{utils.INT2STR(prof.mean_6km[0])}/{utils.INT2STR(prof.mean_6km[1])}",
          f"{utils.INT2STR(prof.srw_6km[0])}/{utils.INT2STR(prof.srw_6km[1])}"],
     ]
+    wind_colors = [
+        [colors_srh1(prof.srh1km[0]),
+         colors_shear1(utils.mag(prof.sfc_1km_shear[0], prof.sfc_1km_shear[1])),
+         "black", "black"],
+        [colors_srh1(prof.srh3km[0]),
+         colors_shear1(utils.mag(prof.sfc_3km_shear[0], prof.sfc_3km_shear[1])),
+         "black", "black"],
+        [colors_srh1(prof.esrh[0]),
+         colors_shear1(utils.mag(prof.eff_shear[0], prof.eff_shear[1])),
+         "black", "black"],
+        ["black",
+         colors_shear1(utils.mag(prof.sfc_6km_shear[0], prof.sfc_6km_shear[1])),
+         "black", "black"],
+    ]
     for ix, x in enumerate(wind_x[1:]):
         for iy, y in enumerate(wind_y[1:]):
             skewt.fig.text(
                 x, y, wind_values[iy][ix], fontsize=fontsize, ha="center",
-                va="center")
+                va="center", color=wind_colors[iy][ix])
 
     lambda_x = [0.725, 0.78]
     lambda_y = thermo_y
@@ -699,13 +1003,13 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
     lambda_values = [
         "", prof.lapserate_3km, prof.lapserate_3_6km, prof.lapserate_850_500,
         prof.lapserate_700_500]
-    for y, layer, value in zip(wind_y, layers, lambda_values):
+    for y, layer, value in zip(wind_y[1:], layers[1:], lambda_values[1:]):
         skewt.fig.text(
             lambda_x[0], y, layer, weight="bold", fontsize=fontsize,
             ha="center", va="center")
         skewt.fig.text(
             lambda_x[1], y, utils.FLOAT2STR(value, 1), fontsize=fontsize,
-            ha="center", va="center")
+            ha="center", va="center", color=colors_lr(value))
 
     lower_y = [0.07, 0.04]
     lower_x = [0.03, 0.08, 0.14, 0.19, 0.25, 0.3, 0.41, 0.5, 0.56, 0.61]
@@ -717,7 +1021,7 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
         ha="center", va="center")
     skewt.fig.text(
         lower_x[1], lower_y[0], utils.INT2STR(prof.dcape), fontsize=fontsize,
-        ha="center", va="center")
+        ha="center", va="center", color=colors_dcape(prof.dcape))
     skewt.fig.text(
         lower_x[1], lower_y[1],
         f"{utils.INT2STR(thermo.ctof(prof.dpcl_ttrace.max()))}°F",
@@ -744,10 +1048,11 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
         ha="center", va="center")
     skewt.fig.text(
         lower_x[5], lower_y[0], f"{utils.FLOAT2STR(prof.pwat, 2)}in",
-        fontsize=fontsize, ha="center", va="center")
+        fontsize=fontsize, ha="center", va="center",
+        color=colors_pwat(prof.pwat))
     skewt.fig.text(
         lower_x[5], lower_y[1], prof.precip_type, fontsize=fontsize,
-        ha="center", va="center")
+        ha="center", va="center", color=colors_ptype(prof.precip_type))
 
     skewt.fig.text(
         lower_x[6], lower_y[0], "150-350mb AGL RH:", weight="bold",
@@ -757,10 +1062,12 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
         fontsize=fontsize, ha="center", va="center")
     skewt.fig.text(
         lower_x[7], lower_y[0], f"{utils.INT2STR(prof.mid_rh)}%",
-        fontsize=fontsize, ha="center", va="center")
+        fontsize=fontsize, ha="center", va="center",
+        color=colors_rh(prof.mid_rh))
     skewt.fig.text(
         lower_x[7], lower_y[1], f"{utils.INT2STR(prof.low_rh)}%",
-        fontsize=fontsize, ha="center", va="center")
+        fontsize=fontsize, ha="center", va="center",
+        color=colors_rh(prof.low_rh))
 
     skewt.fig.text(
         lower_x[8], lower_y[0], "FZL:", weight="bold",
@@ -768,22 +1075,22 @@ def plot_sounding(data, lon, lat, station_name, fcst_time, init_time, ens):
     skewt.fig.text(
         lower_x[8], lower_y[1], "WBZ:", weight="bold",
         fontsize=fontsize, ha="center", va="center")
+    fzl = interp.hght(prof, params.temp_lvl(prof, 0))
     skewt.fig.text(
-        lower_x[9], lower_y[0],
-        f"{utils.INT2STR(interp.hght(prof, params.temp_lvl(prof, 0)))}m",
-        fontsize=fontsize, ha="center", va="center")
+        lower_x[9], lower_y[0], f"{utils.INT2STR(fzl)}m", fontsize=fontsize,
+        ha="center", va="center", color=colors_fzl(fzl))
+    wbz = interp.hght(prof, params.temp_lvl(prof, 0, wetbulb=True))
     skewt.fig.text(
-        lower_x[9], lower_y[1],
-        f"{utils.INT2STR(interp.hght(prof, params.temp_lvl(prof, 0, wetbulb=True)))}m",
-        fontsize=fontsize, ha="center", va="center")
+        lower_x[9], lower_y[1], f"{utils.INT2STR(wbz)}m", fontsize=fontsize,
+        ha="center", va="center", color=colors_fzl(wbz))
 
     haz_x = 0.71
     skewt.fig.text(
-        haz_x, lower_y[0], "Hazzard:", weight="bold", fontsize=fontsize,
+        haz_x, lower_y[0], "Hazard:", weight="bold", fontsize=fontsize,
         ha="center", va="center")
     skewt.fig.text(
         haz_x, lower_y[1], prof.watch_type, weight="bold", fontsize=fontsize,
-        ha="center", va="center")
+        ha="center", va="center", color=colors_hazard(prof.watch_type))
 
     skewt.plot_thetae(prof.pres, prof.thetae)
 
